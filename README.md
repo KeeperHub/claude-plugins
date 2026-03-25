@@ -12,16 +12,27 @@ Claude Code plugin marketplace by KeeperHub.
 
 ### keeperhub
 
-Manage KeeperHub workflows, execute automations, and browse templates from Claude Code.
+Build and manage Web3 automation workflows from Claude Code. Create workflows that monitor smart contracts, execute DeFi operations, transfer tokens, and send notifications across Discord, Telegram, email, and webhooks. Includes 4 skills that activate automatically based on conversation context, 2 slash commands for setup, and full MCP tool access via the kh CLI.
 
 ```
 /plugin install keeperhub@keeperhub-plugins
 ```
 
-Run `/keeperhub:login` after install to set up your API key.
+Run `/keeperhub:login` after install to authenticate.
 
-Adds:
-- `/keeperhub:login` command -- set up API key and configure the MCP server
-- `/keeperhub:status` command -- check auth and connectivity
-- 4 skills -- workflow-builder, template-browser, execution-monitor, plugin-explorer
-- Full MCP tool access via the `kh` CLI
+**Commands:**
+- `/keeperhub:login` -- authenticate and configure the MCP server
+- `/keeperhub:status` -- check auth, CLI version, and MCP readiness
+
+**Skills (activate automatically):**
+- **workflow-builder** -- create workflows from natural language
+- **template-browser** -- browse and deploy pre-built workflow templates
+- **execution-monitor** -- monitor runs and debug failures
+- **plugin-explorer** -- discover available plugins and integrations
+
+**Example use cases:**
+- "Create a workflow that monitors my Aave health factor every 15 minutes and sends a Telegram alert if it drops below 1.5"
+- "Show me available workflow templates for wallet monitoring"
+- "Why did my last workflow execution fail? Show me the logs"
+- "What KeeperHub plugins and integrations are available?"
+- "Set up an automation that checks ETH price hourly and sends a Discord notification when it crosses $3000"
