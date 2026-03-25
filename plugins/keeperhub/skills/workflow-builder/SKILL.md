@@ -34,8 +34,8 @@ Do NOT activate when:
 
 <process>
 1. **Check authentication** before doing anything:
-   - Use the `verify-auth.sh` script or check for `KEEPERHUB_API_KEY`
-   - If not authenticated, tell the user: "You need to authenticate first. Run `/keeperhub:login` to set up your API key."
+   - Check if `kh auth status` succeeds or if `KH_API_KEY` env var is set
+   - If not authenticated, tell the user: "You need to authenticate first. Run `/keeperhub:login` to set up."
    - Do not proceed until auth is confirmed
 
 2. **Understand the user's intent**:

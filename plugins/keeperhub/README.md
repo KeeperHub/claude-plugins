@@ -26,9 +26,9 @@ Or see [CLI installation options](https://github.com/KeeperHub/cli#install) for 
 ```
 
 This walks you through:
-- Authenticating with your KeeperHub account via API key (`kh_` prefix)
+- Authenticating with your KeeperHub account via browser login
 - Verifying API connectivity
-- Saving config to `~/.claude/keeperhub/config.json`
+- Configuring the MCP server
 
 **4. Restart Claude Code** for the MCP tools to become available.
 

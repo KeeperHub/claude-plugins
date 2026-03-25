@@ -31,8 +31,8 @@ Do NOT activate when:
 
 <process>
 1. **Check authentication** before doing anything:
-   - Verify `KEEPERHUB_API_KEY` is available
-   - If not authenticated, tell the user: "You need to authenticate first. Run `/keeperhub:login` to set up your API key."
+   - Check if `kh auth status` succeeds or if `KH_API_KEY` env var is set
+   - If not authenticated, tell the user: "You need to authenticate first. Run `/keeperhub:login` to set up."
    - Do not proceed until auth is confirmed
 
 2. **Search for templates**:
