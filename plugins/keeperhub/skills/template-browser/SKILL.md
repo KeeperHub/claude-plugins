@@ -43,7 +43,7 @@ Do NOT activate when:
 3. **Show template details** when the user picks one:
    - Use `get_template` to fetch full metadata
    - Present: name, description, what it does, required integrations, trigger type, actions involved
-   - Highlight any prerequisites (e.g., "requires Discord integration" or "needs a wallet configured")
+   - Highlight any prerequisites (e.g., "requires Discord integration" or "needs an API key configured")
 
 4. **Deploy the template** when the user confirms:
    - Use `deploy_template` to create the workflow from the template

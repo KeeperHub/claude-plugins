@@ -1,0 +1,89 @@
+name: Validate Plugin Structure
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON syntax
+        run: |
+          echo "Validating JSON files..."
+          errors=0
+          for f in $(find . -name "*.json" -not -path "./node_modules/*"); do
+            if ! jq empty "$f" 2>/dev/null; then
+              echo "Invalid JSON: $f"
+              errors=$((errors + 1))
+            fi
+          done
+          if [ "$errors" -gt 0 ]; then
+            echo "$errors JSON file(s) have syntax errors"
+            exit 1
+          fi
+          echo "All JSON files valid"
+
+      - name: Validate plugin structure
+        run: |
+          echo "Checking required files..."
+          errors=0
+
+          for plugin_dir in plugins/*/; do
+            name=$(basename "$plugin_dir")
+            echo "Validating plugin: $name"
+
+            # Check required manifest
+            if [ ! -f "$plugin_dir/.claude-plugin/plugin.json" ]; then
+              echo "  Missing: .claude-plugin/plugin.json"
+              errors=$((errors + 1))
+            else
+              # Validate name field exists
+              plugin_name=$(jq -r '.name // empty' "$plugin_dir/.claude-plugin/plugin.json")
+              if [ -z "$plugin_name" ]; then
+                echo "  Missing 'name' field in plugin.json"
+                errors=$((errors + 1))
+              fi
+            fi
+
+            # Check recommended files
+            [ ! -f "$plugin_dir/README.md" ] && echo "  Warning: Missing README.md"
+          done
+
+          # Check marketplace manifest
+          if [ ! -f ".claude-plugin/marketplace.json" ]; then
+            echo "Missing: .claude-plugin/marketplace.json"
+            errors=$((errors + 1))
+          fi
+
+          # Check repo-level files
+          [ ! -f "LICENSE" ] && echo "Warning: Missing LICENSE"
+          [ ! -f "README.md" ] && echo "Warning: Missing README.md"
+          [ ! -f "SECURITY.md" ] && echo "Warning: Missing SECURITY.md"
+
+          if [ "$errors" -gt 0 ]; then
+            echo "$errors validation error(s) found"
+            exit 1
+          fi
+          echo "All validations passed"
+
+      - name: Check MCP endpoint reachability
+        run: |
+          for plugin_dir in plugins/*/; do
+            if [ -f "$plugin_dir/.mcp.json" ]; then
+              urls=$(jq -r '.. | .url? // empty' "$plugin_dir/.mcp.json" 2>/dev/null)
+              for url in $urls; do
+                echo "Checking: $url"
+                status=$(curl -sf -o /dev/null -w "%{http_code}" --max-time 10 "$url" 2>/dev/null || echo "000")
+                if [ "$status" = "000" ]; then
+                  echo "  Warning: $url is unreachable (may require auth)"
+                else
+                  echo "  Reachable (HTTP $status)"
+                fi
+              done
+            fi
+          done
