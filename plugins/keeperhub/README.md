@@ -43,3 +43,7 @@ See the [MCP server documentation](https://docs.keeperhub.com/ai-tools/mcp-serve
 
 - A KeeperHub account at https://app.keeperhub.com
 - A browser (for OAuth authorization)
+
+## Privacy
+
+See our [Privacy Policy](https://keeperhub.com/privacy) for details on how data is handled.
