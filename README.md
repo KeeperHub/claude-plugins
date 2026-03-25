@@ -12,17 +12,17 @@ Claude Code plugin marketplace by KeeperHub.
 
 ### keeperhub
 
-Build and manage Web3 automation workflows from Claude Code. Create workflows that monitor smart contracts, execute DeFi operations, transfer tokens, and send notifications across Discord, Telegram, email, and webhooks. Includes 4 skills that activate automatically based on conversation context, 2 slash commands for setup, and full MCP tool access via the kh CLI.
+Build and manage Web3 automation workflows from Claude Code. Create workflows that monitor smart contracts, execute DeFi operations, transfer tokens, and send notifications across Discord, Telegram, email, and webhooks. Connects to KeeperHub's remote MCP server with OAuth browser authentication. Includes 4 skills and 2 slash commands.
 
 ```
 /plugin install keeperhub@keeperhub-plugins
 ```
 
-Run `/keeperhub:login` after install to authenticate.
+After install, run `/mcp` in Claude Code and authorize the keeperhub server via browser.
 
 **Commands:**
-- `/keeperhub:login` -- authenticate and configure the MCP server
-- `/keeperhub:status` -- check auth, CLI version, and MCP readiness
+- `/keeperhub:login` -- setup guide for connecting to KeeperHub MCP
+- `/keeperhub:status` -- check MCP connection status
 
 **Skills (activate automatically):**
 - **workflow-builder** -- create workflows from natural language

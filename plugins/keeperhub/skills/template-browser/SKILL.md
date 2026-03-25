@@ -31,7 +31,7 @@ Do NOT activate when:
 
 <process>
 1. **Check authentication** before doing anything:
-   - Check if `kh auth status` succeeds or if `KH_API_KEY` env var is set
+   - Check if KeeperHub MCP tools are available (connection is active) or if `KH_API_KEY` env var is set
    - If not authenticated, tell the user: "You need to authenticate first. Run `/keeperhub:login` to set up."
    - Do not proceed until auth is confirmed
 

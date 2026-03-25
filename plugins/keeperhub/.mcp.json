@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "keeperhub": {
-      "command": "kh",
-      "args": ["serve", "--mcp"]
+      "type": "http",
+      "url": "https://app.keeperhub.com/mcp"
     }
   }
 }

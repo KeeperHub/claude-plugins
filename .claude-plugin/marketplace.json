@@ -13,8 +13,8 @@
     {
       "name": "keeperhub",
       "source": "./plugins/keeperhub",
-      "description": "Manage KeeperHub workflows, execute automations, and browse templates from Claude Code. Includes MCP integration for full API access via the kh CLI.",
-      "version": "2.0.0",
+      "description": "Manage KeeperHub workflows, execute automations, and browse templates from Claude Code. Connects to KeeperHub's remote MCP server with OAuth browser authentication.",
+      "version": "3.0.0",
       "author": {
         "name": "KeeperHub"
       },
@@ -26,7 +26,8 @@
         "workflow",
         "automation",
         "web3",
-        "blockchain"
+        "blockchain",
+        "mcp"
       ],
       "category": "automation"
     }

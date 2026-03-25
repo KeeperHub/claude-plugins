@@ -4,42 +4,27 @@ Manage KeeperHub workflows, execute automations, and browse templates directly f
 
 ## Quick Start
 
-**1. Install the `kh` CLI**
-
-```
-brew install keeperhub/tap/kh
-```
-
-Or see [CLI installation options](https://github.com/KeeperHub/cli#install) for other platforms.
-
-**2. Install the plugin**
+**1. Install the plugin**
 
 ```
 /plugin marketplace add KeeperHub/claude-plugins
 /plugin install keeperhub@keeperhub-plugins
 ```
 
-**3. Run setup**
+**2. Authorize**
 
-```
-/keeperhub:login
-```
+Run `/mcp` in Claude Code, find "keeperhub" in the server list, and authorize via browser. That's it.
 
-This walks you through:
-- Authenticating with your KeeperHub account via browser login
-- Verifying API connectivity
-- Configuring the MCP server
+For headless/CI environments, set `KH_API_KEY` with an organization API key (`kh_` prefix) instead.
 
-**4. Restart Claude Code** for the MCP tools to become available.
-
-That's it. Try asking Claude to "create a workflow that monitors a wallet" or run `/keeperhub:status` to verify.
+**3.** Try asking Claude to "create a workflow that monitors a wallet" or run `/keeperhub:status` to verify.
 
 ## Commands
 
 | Command | Description |
 |---------|-------------|
-| `/keeperhub:login` | Set up authentication and verify MCP server |
-| `/keeperhub:status` | Check auth status, API connectivity, and MCP availability |
+| `/keeperhub:login` | Setup guide for connecting to KeeperHub MCP |
+| `/keeperhub:status` | Check MCP connection status and authentication |
 
 ## Skills
 
@@ -48,11 +33,13 @@ That's it. Try asking Claude to "create a workflow that monitors a wallet" or ru
 - **execution-monitor** -- Monitor executions and debug failures. Triggered by "check execution", "why did my workflow fail".
 - **plugin-explorer** -- Discover available plugins and integrations. Triggered by "what plugins are available", "show integrations".
 
-## MCP Tools
+## MCP Server
 
-This plugin uses `kh serve --mcp` to provide MCP tools for full API access: workflow CRUD, execution management, template operations, plugin discovery, and integration queries. See the [kh CLI documentation](https://github.com/KeeperHub/cli) for details.
+This plugin connects to KeeperHub's remote MCP server at `app.keeperhub.com/mcp` via HTTP. Authentication is handled via OAuth (browser) or API key (headless). No local CLI or process needed.
+
+See the [MCP server documentation](https://docs.keeperhub.com/ai-tools/mcp-server) for details on available tools.
 
 ## Requirements
 
 - A KeeperHub account at https://app.keeperhub.com
-- The `kh` CLI ([install instructions](https://github.com/KeeperHub/cli#install))
+- A browser (for OAuth authorization)

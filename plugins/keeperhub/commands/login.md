@@ -1,74 +1,57 @@
 ---
-description: Set up KeeperHub -- install the kh CLI and authenticate. Run this once to get started.
+description: Connect to KeeperHub MCP. Authorize via browser or set an API key for headless environments.
 allowed-tools: [Bash, Read]
 ---
 
 <objective>
-Set up the KeeperHub plugin by:
-1. Verifying the `kh` CLI is installed
-2. Authenticating via browser login or API key
-3. Confirming the MCP server can start
+Help the user connect to the KeeperHub MCP server by:
+1. Checking if MCP tools are already available
+2. Guiding them through OAuth authorization via /mcp
+3. Or setting up an API key for headless environments
 </objective>
 
 <context>
-kh CLI installed: !`command -v kh &>/dev/null && echo "YES" || echo "NO"`
-kh CLI version: !`kh --version 2>/dev/null || echo "NOT_INSTALLED"`
-kh auth status: !`kh auth status --json 2>/dev/null || echo "NOT_AUTHENTICATED"`
 KH_API_KEY env var set: !`[ -n "${KH_API_KEY:-}" ] && echo "YES" || echo "NO"`
 </context>
 
 <process>
-1. **Check the kh CLI** by examining the context above:
-   - If kh CLI installed is "NO":
-     - Tell the user the `kh` CLI is required for this plugin
-     - Provide install instructions:
-       - macOS: `brew install keeperhub/tap/kh`
-       - Go: `go install github.com/keeperhub/cli/cmd/kh@latest`
-       - Or download from https://github.com/KeeperHub/cli/releases
-     - Do not proceed until the user confirms they have installed it
+1. **Check if already connected**:
+   - If KH_API_KEY env var is "YES", the user has an API key configured
+   - Tell them MCP tools should be available. Suggest running `/keeperhub:status` to verify.
+   - If tools are working, skip to step 4
 
-2. **Check existing authentication** from the context above:
-   - If kh auth status returned valid JSON with a "user" field, the user is already authenticated
-   - Report "Already authenticated as EMAIL (ORG)" and skip to step 5
-   - If KH_API_KEY env var is set, note that auth will use the environment variable
-   - If not authenticated, proceed to step 3
+2. **Guide OAuth authorization**:
+   - The plugin is configured to connect to `https://app.keeperhub.com/mcp`
+   - Tell the user:
+     a. Run `/mcp` in Claude Code
+     b. Find "keeperhub" in the MCP server list
+     c. Click to authorize. This opens a browser for OAuth consent.
+     d. Approve access in the browser
+     e. Return to Claude Code. MCP tools should now be available.
 
-3. **Authenticate** using the kh CLI:
-   - Tell the user you will open a browser window for authentication
-   - Run via Bash:
-     ```bash
-     kh auth login
+3. **Headless/CI fallback** (if browser auth is not possible):
+   - Tell the user to create an organization API key:
+     a. Log in to https://app.keeperhub.com
+     b. Click avatar > API Keys > Organisation tab > New API Key
+     c. Copy the key (starts with `kh_`, shown only once)
+   - Set the environment variable:
      ```
-   - This opens a browser for device code authentication
-   - The CLI handles the OAuth flow and stores the token in the OS keyring
-   - If browser login is not possible (headless environment, CI), tell the user:
-     a. Create an organization API key at https://app.keeperhub.com
-        - Click avatar > API Keys > Organisation tab > New API Key
-        - Copy the key (starts with `kh_`, shown only once)
-     b. Set the `KH_API_KEY` environment variable with the key
+     KH_API_KEY=kh_your_key_here
+     ```
+   - Restart Claude Code for the key to take effect
 
-4. **Verify authentication**:
-   ```bash
-   kh auth status
-   ```
-   - If it shows user, organization, and role: authentication succeeded
-   - If it shows "not authenticated": something went wrong, ask the user to try again
-
-5. **Report setup status**:
+4. **Report status**:
    - Show a summary:
      ```
      KeeperHub Setup Complete
      ------------------------
-     kh CLI:     Installed (VERSION)
-     Auth:       Authenticated as EMAIL (ORG)
-     MCP Server: kh serve --mcp (starts automatically)
+     MCP Server: app.keeperhub.com/mcp (remote)
+     Auth:       [OAuth / API key]
      ```
-   - Tell the user to restart Claude Code for the MCP tools to become available
-   - The MCP server starts automatically via `kh serve --mcp` when Claude Code loads the plugin
+   - Suggest trying: "Create a workflow that monitors a wallet"
 </process>
 
 <success_criteria>
-- kh CLI is installed and on PATH
-- User is authenticated (kh auth status shows user info)
-- User informed to restart Claude Code for MCP tools
+- User is connected to KeeperHub MCP (tools available)
+- User informed how to verify with /keeperhub:status
 </success_criteria>
