@@ -1,6 +1,6 @@
 # KeeperHub Plugin for Claude Code
 
-Manage KeeperHub workflows, execute automations, and browse templates directly from Claude Code.
+Build and manage automation workflows from Claude Code. Monitor smart contracts, track on-chain events, configure scheduled tasks, and connect notifications across Discord, Telegram, email, and webhooks.
 
 ## Quick Start
 
@@ -17,7 +17,7 @@ Run `/mcp` in Claude Code, find "keeperhub" in the server list, and authorize vi
 
 For headless/CI environments, set `KH_API_KEY` with an organization API key (`kh_` prefix) instead.
 
-**3.** Try asking Claude to "create a workflow that monitors a wallet" or run `/keeperhub:status` to verify.
+**3.** Try asking Claude to "create a workflow that monitors a smart contract event" or run `/keeperhub:status` to verify.
 
 ## Commands
 

@@ -16,11 +16,11 @@ complexity only when needed.
 <trigger_conditions>
 Activate when ANY of these are true:
 - User says "create a workflow", "build a workflow", "make a workflow", or "new workflow"
-- User wants to "monitor" a contract, wallet, token, or address
+- User wants to "monitor" a contract, API endpoint, or data source
 - User says "set up automation", "automate", or "when X happens do Y"
 - User says "alert me when", "notify me when", or "watch for"
-- User describes a pipeline like "transfer then notify" or "check balance and send alert"
-- User mentions specific KeeperHub actions like "call contract", "send webhook", "discord notification"
+- User describes a pipeline like "check status then notify" or "check condition and send alert"
+- User mentions specific KeeperHub actions like "read contract", "send webhook", "discord notification"
 </trigger_conditions>
 
 <do_not_trigger>

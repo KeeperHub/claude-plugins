@@ -48,7 +48,7 @@ KH_API_KEY env var set: !`[ -n "${KH_API_KEY:-}" ] && echo "YES" || echo "NO"`
      MCP Server: app.keeperhub.com/mcp (remote)
      Auth:       [OAuth / API key]
      ```
-   - Suggest trying: "Create a workflow that monitors a wallet"
+   - Suggest trying: "Create a workflow that monitors a smart contract event"
 </process>
 
 <success_criteria>

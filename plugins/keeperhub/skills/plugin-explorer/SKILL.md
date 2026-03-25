@@ -15,7 +15,7 @@ integrations the user already has connected.
 Activate when ANY of these are true:
 - User says "what plugins are available", "show plugins", or "list plugins"
 - User says "show integrations", "what integrations do I have", or "list integrations"
-- User says "how do I use" followed by a plugin name (web3, discord, sendgrid, webhook)
+- User says "how do I use" followed by a plugin name (notifications, discord, sendgrid, webhook)
 - User says "what can KeeperHub do", "what actions are available", or "what are my options"
 - User asks about a specific action type or capability
 - User wants to validate a plugin configuration before using it in a workflow
@@ -38,7 +38,7 @@ Do NOT activate when:
 2. **For general exploration** ("what can KeeperHub do", "what plugins"):
    - Use `search_plugins` to list available plugins
    - Present a summary: plugin name, description, number of actions
-   - Group by category if helpful (web3, notifications, utilities)
+   - Group by category if helpful (monitoring, notifications, utilities)
 
 3. **For specific plugin details** ("how do I use web3"):
    - Use `get_plugin` to get full documentation
@@ -48,7 +48,6 @@ Do NOT activate when:
 
 4. **For integration status** ("what integrations do I have"):
    - Use `list_integrations` to show configured integrations
-   - For web3 users, use `get_wallet_integration` to show wallet details
    - Highlight which integrations are active vs. need setup
    - Suggest plugins that would work with existing integrations
 
@@ -67,7 +66,6 @@ Do NOT activate when:
 - `get_plugin` -- get full plugin documentation
 - `list_action_schemas` -- list available actions and their schemas
 - `list_integrations` -- show configured integrations
-- `get_wallet_integration` -- get wallet integration details
 - `validate_plugin_config` -- validate action configuration
 - `tools_documentation` -- get MCP tool documentation
 </process>
