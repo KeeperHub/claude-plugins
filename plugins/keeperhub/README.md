@@ -4,20 +4,15 @@ Build and manage automation workflows from Claude Code. Monitor smart contracts,
 
 ## Quick Start
 
-**1. Install the plugin**
-
 ```
 /plugin marketplace add KeeperHub/claude-plugins
 /plugin install keeperhub@keeperhub-plugins
+/keeperhub:login
 ```
-
-**2. Authorize**
-
-Run `/mcp` in Claude Code, find "keeperhub" in the server list, and authorize via browser. That's it.
 
 For headless/CI environments, set `KH_API_KEY` with an organization API key (`kh_` prefix) instead.
 
-**3.** Try asking Claude to "create a workflow that monitors a smart contract event" or run `/keeperhub:status` to verify.
+Run `/keeperhub:status` to verify, then try "create a workflow that monitors a smart contract event".
 
 ## Commands
 
